@@ -8,6 +8,7 @@ SRC_DIR		=	$(realpath ./src)
 
 SRC_FILES	=	my_convert_base.c \
 			my_int_to_str.c \
+			my_memset.c \
 			my_find_prime_sup.c \
 			my_getnbr_base.c \
 			my_getnbr.c \

@@ -16,6 +16,7 @@
 
 #define ABS(value) (value < 0) ? -value : value
 
+void	*my_memset(void *s, int c, size_t n);
 int	my_putchar(char c);
 int	my_isneg(int nb);
 int	my_put_nbr(int nb);
