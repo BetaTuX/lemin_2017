@@ -16,14 +16,14 @@ OBJ		=	$(SRC:%.c=%.o)
 
 NAME		=	lem_in
 
-INCLUDE		=	-I include
+INCLUDE		=	-I include -I lib/my/include
 
 CFLAGS		=	-Wall -Wextra
 CFLAGS		+=	$(INCLUDE)
 
 LIB_DIR		=	lib/
 
-LIB_FLAGS	=	-L $(LIB_DIR) -lmy
+LIB_FLAGS	=	-L $(LIB_DIR)my -lmy
 
 LIB		=	$(LIB_DIR)my/libmy.a
 
