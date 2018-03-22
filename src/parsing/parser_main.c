@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "my.h"
 #include "lemin.h"
+#include "parsing.h"
 
 void reverse_linked_lists(game_t *game)
 {
@@ -19,6 +20,7 @@ void reverse_linked_lists(game_t *game)
 
 int check_rooms_validity(game_t *game)
 {
+	(void)game;
 	return (0);
 }
 

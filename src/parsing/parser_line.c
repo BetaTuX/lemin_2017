@@ -58,6 +58,8 @@ int parse_line(game_t *game, char **args, e_room_t next_room_type)
 {
 	char *data[my_array_len((void **)args) + 1];
 
+	(void)game;
+	(void)next_room_type;
 	for (int i = 0; args[i] != NULL && args[i][0] != '#'; i++) {
 		data[i] = args[i];
 		data[i + 1] = NULL;

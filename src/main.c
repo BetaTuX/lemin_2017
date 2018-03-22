@@ -12,7 +12,7 @@
 
 int main(UNUSED int argc, UNUSED char **argv)
 {
-	game_t game = {0, NULL, NULL};
+	game_t game = {0, NULL, NULL, NULL, NULL};
 
 	if (fill_game(&game))
 		return (ERROR);
