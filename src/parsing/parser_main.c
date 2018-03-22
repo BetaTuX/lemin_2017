@@ -11,19 +11,15 @@
 #include "my.h"
 #include "lemin.h"
 
-int parse_comment_or_command(e_room_t *next_room_type, char **args)
+int parse_comment_or_command(UNUSED e_room_t *next_room_type, \
+UNUSED char **args)
 {
-	my_printf("Receved command:\n");
-	for (int i = 0; args[i] != NULL; i++)
-		my_printf("    argument %i: %s\n", i, args[i]);
 	return (0);
 }
 
-int parse_line(game_t *game, char **args, e_room_t next_room_type)
+int parse_line(UNUSED game_t *game, UNUSED char **args, \
+UNUSED e_room_t next_room_type)
 {
-	my_printf("Receved line:\n");
-	for (int i = 0; args[i] != NULL; i++)
-		my_printf("    argument %i: %s\n", i, args[i]);
 	return (0);
 }
 
@@ -38,7 +34,7 @@ int fill_game(game_t *game)
 		args = my_parse_str_to_array(next_line, " \t", "", "");
 		if (next_line[0] == '#')
 			parse_comment_or_command(&next_room_type, args);
-		if (parse_line(game, args, next_room_type)) {
+		else if (parse_line(game, args, next_room_type)) {
 			my_free_array((void **)args);
 			free(next_line);
 			return (84);
