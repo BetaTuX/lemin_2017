@@ -32,6 +32,8 @@
 
 	typedef struct s_game {
 		int ant_nb;
+		room_t *start;
+		room_t *end;
 		l_list_t *rooms;
 		l_list_t *tunnels;
 	} game_t;
