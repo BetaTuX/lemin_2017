@@ -16,7 +16,11 @@ PARSING_FILES	=	parser_main.c					\
 			parser_comment_or_command.c			\
 			parser_line.c					\
 			parser_is.c					\
-			parser_is_room_existing.c
+			parser_is_room_existing.c			\
+			parser_parse_room.c				\
+			parser_parse_nb_ant.c				\
+			parser_parse_tunnel.c				\
+			parser_get_room.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 			$(addprefix $(PARSING_DIR)/, $(PARSING_FILES))

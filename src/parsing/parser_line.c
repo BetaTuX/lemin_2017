@@ -14,60 +14,6 @@
 #include "lemin.h"
 #include "parsing.h"
 
-room_t *get_default_room(game_t *game, e_room_t room_type, char **args)
-{
-	room_t *room = NULL;
-
-	if (does_name_already_exist(game, args[0])) {
-		my_puterror("lem_in: error: room name already exist: ");
-		return (NULL);
-	}
-	room = malloc(sizeof(*room));
-	if (room == NULL) {
-		my_puterror("lem_in: system error: malloc failed: ");
-		return (NULL);
-	}
-	room->marked = 0;
-	room->name = my_strdup(args[0]);
-	room->pos = (vector2i_t){my_getnbr(args[1]), my_getnbr(args[2])};
-	room->tunnels = NULL;
-	room->type = room_type;
-	return (room);
-}
-
-int parse_room(game_t *game, e_room_t room_type, char **args)
-{
-	room_t *room = NULL;
-
-	if (room_type == START && game->start != NULL) {
-		my_puterror("lem_in: error: redefinition of starting room: ");
-		return (84);
-	}
-	if (room_type == END && game->end != NULL) {
-		my_puterror("lem_in: error: redefinition of ending room: ");
-		return (84);
-	}
-	if ((room = get_default_room(game, room_type, args)) == NULL)
-		return (84);
-	(game->room_nb) += 1;
-	push(&(game->rooms), room);
-	if (room_type == START)
-		game->start = room;
-	if (room_type == END)
-		game->end = room;
-	return (0);
-}
-
-int parse_nb_ant(game_t *game, char **args)
-{
-	if (game->ant_nb != 0) {
-		my_puterror("lem_in: error: redefinition of ant number: ");
-		return (84);
-	}
-	game->ant_nb = my_getnbr(args[0]);
-	return (0);
-}
-
 int parse_line(game_t *game, char **args, e_room_t *next_room_type)
 {
 	char *data[my_array_len((void **)args) + 1];
@@ -83,6 +29,8 @@ int parse_line(game_t *game, char **args, e_room_t *next_room_type)
 	if (is_nb_ant(data) && parse_nb_ant(game, data))
 		return (84);
 	if (is_room(data) && parse_room(game, *next_room_type, args))
+		return (84);
+	if (is_tunnel(data) && parse_tunnel(game, args))
 		return (84);
 	*next_room_type = DEFAULT;
 	return (0);
