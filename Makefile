@@ -10,7 +10,12 @@ SRC_DIR		=	$(realpath src)
 SRC_FILES	=	global.c		\
 			main.c
 
-SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+PARSING_DIR	=	$(realpath src/parsing)
+
+PARSING_FILES	=	parser_main.c
+
+SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
+			$(addprefix $(PARSING_DIR)/, $(PARSING_FILES))
 
 OBJ		=	$(SRC:%.c=%.o)
 
