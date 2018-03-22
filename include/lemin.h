@@ -34,7 +34,6 @@
 		int ant_nb;
 		l_list_t *rooms;
 		l_list_t *tunnels;
-
 	} game_t;
 
 #endif
