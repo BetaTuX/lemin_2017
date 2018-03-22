@@ -9,4 +9,9 @@
 
 #ifndef __LEMIN_PARSER_H_
 	#define __LEMIN_PARSER_H_
+
+	#include "lemin.h"
+
+	int fill_game(game_t *game);
+
 #endif /* !__LEMIN_PARSER_H_ */
