@@ -8,6 +8,10 @@
 #ifndef __BTA_LIST_H_
 #define __BTA_LIST_H_
 
+#ifndef NULL
+	#define NULL (void *)0
+#endif
+
 typedef struct node {
 	void *data;
 	struct node *next;

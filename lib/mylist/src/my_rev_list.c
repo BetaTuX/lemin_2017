@@ -7,16 +7,15 @@
 
 #include "mylist.h"
 
-int my_rev_list(l_list_t const **begin)
+int my_rev_list(l_list_t **begin)
 {
-	l_list_t const *cpy = *begin;
-	l_list_t *ans = 0;
+	l_list_t *cpy = NULL;
 	int i = 0;
 
 	for (; cpy != 0; i++) {
-		push(&ans, cpy->data);
-		cpy = cpy->next;
+		push(&cpy, (*begin)->data);
+		*begin = (*begin)->next;
 	}
-	*begin = ans;
+	*begin = cpy;
 	return (i);
 }
