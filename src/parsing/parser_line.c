@@ -12,54 +12,61 @@
 #include "my.h"
 #include "match.h"
 #include "lemin.h"
+#include "parsing.h"
 
-static bool is_nb_ant(char **args)
+room_t *get_default_room(game_t *game, e_room_t room_type, char **args)
 {
-	if (my_array_len((void **)args) != 1)
-		return (false);
-	if (my_str_isnum(args[0]) && my_getnbr(args[0]) != 0)
-		return (true);
-	return (false);
-}
+	room_t *room = NULL;
 
-static bool is_room(char **args)
-{
-	if (my_array_len((void **)args) != 3)
-		return (false);
-	if (!my_str_isnum(args[1]) || !my_str_isnum(args[2]))
-		return (false);
-	return (true);
-}
-
-static bool is_tunnel(char **args)
-{
-	int nb_args = my_array_len((void **)args);
-
-	if (nb_args > 3)
-		return (false);
-	switch (nb_args) {
-	case 1:
-		if (match(args[0], "*-*"))
-			return (true);
-		break;
-	case 2:
-		if (match(args[0], "*-") || match(args[1], "-*"))
-			return (true);
-		break;
-	case 3:
-		if (!my_strcmp(args[1], "-"))
-			return (true);
-		break;
+	room = malloc(sizeof(*room));
+	if (room == NULL) {
+		my_puterror("lem_in: system error: malloc failed\n");
+		return (NULL);
 	}
-	return (false);
+	room->marked = 0;
+	room->name = my_strdup(args[0]);
+	room->pos = (vector2i_t){my_getnbr(args[1]), my_getnbr(args[2])};
+	room->tunnels = NULL;
+	room->type = room_type;
+	return (room);
+}
+
+int parse_room(game_t *game, e_room_t room_type, char **args)
+{
+	room_t *room = NULL;
+
+	if (room_type == START && game->start != NULL) {
+		my_puterror("lem_in: error: redefinition of starting room\n");
+		return (84);
+	}
+	if (room_type == END && game->end != NULL) {
+		my_puterror("lem_in: error: redefinition of ending room\n");
+		return (84);
+	}
+	if ((room = get_default_room(game, room_type, args)) == NULL)
+		return (84);
+	push(&(game->rooms), room);
+	if (room_type == START)
+		game->start = room;
+	if (room_type == END)
+		game->end = room;
+	return (0);
+}
+
+int parse_nb_ant(game_t *game, char **args)
+{
+	if (game->ant_nb != 0) {
+		my_puterror("lem_in: error: redefinition of ant number\n");
+		return (84);
+	}
+	game->ant_nb = my_getnbr(args[0]);
+	return (0);
 }
 
 int parse_line(game_t *game, char **args, e_room_t next_room_type)
 {
 	char *data[my_array_len((void **)args) + 1];
 
-	(void)game;
-	(void)next_room_type;
 	for (int i = 0; args[i] != NULL && args[i][0] != '#'; i++) {
 		data[i] = args[i];
 		data[i + 1] = NULL;
@@ -68,5 +75,9 @@ int parse_line(game_t *game, char **args, e_room_t next_room_type)
 		my_puterror("lem_in: error: invalid line: ");
 		return (84);
 	}
+	if (is_nb_ant(data) && parse_nb_ant(game, data))
+		return (84);
+	if (is_room(data) && parse_room(game, next_room_type, args))
+		return (84);
 	return (0);
 }

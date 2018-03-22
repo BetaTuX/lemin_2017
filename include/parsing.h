@@ -14,6 +14,10 @@
 
 	int fill_game(game_t *game);
 
+	bool is_nb_ant(char **args);
+	bool is_room(char **args);
+	bool is_tunnel(char **args);
+
 	int parse_comment_or_command(e_room_t *next_room_type, char **args);
 	int parse_line(game_t *game, char **args, e_room_t next_room_type);
 
