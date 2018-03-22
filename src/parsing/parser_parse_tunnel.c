@@ -14,7 +14,96 @@
 #include "lemin.h"
 #include "parsing.h"
 
+static int connect(room_t *first_room, room_t *second_room, game_t *game)
+{
+	int tunnel_char_size = my_strlen(first_room->name) + \
+my_strlen(second_room->name) + 1;
+	char *tunnel = malloc(sizeof(*tunnel) * (tunnel_char_size + 1));
+
+	if (tunnel == NULL) {
+		my_puterror("lem_in: system error: malloc failed: ");
+		return (84);
+	}
+	for (int i = 0; i < tunnel_char_size; i++)
+		tunnel[i] = 0;
+	my_strcat(tunnel, first_room->name);
+	my_strcat(tunnel, "-");
+	my_strcat(tunnel, second_room->name);
+	push(&(game->tunnels), tunnel);
+	push(&(first_room->tunnels), second_room);
+	push(&(second_room->tunnels), first_room);
+	return (0);
+}
+
+static int parse_tunnel_1(game_t *game, char **args)
+{
+	char **cut = my_parse_str_to_array(args[0], "-", "", "");
+	room_t *first_room = NULL;
+	room_t *second_room = NULL;
+
+	if (my_strcmp(cut[0], cut[1]) == 0) {
+		my_free_array((void **)cut);
+		my_puterror("lem_in: error: tunnel connecting to itself: ");
+		return (84);
+	}
+	first_room = get_room_by_name(game, cut[0]);
+	second_room = get_room_by_name(game, cut[1]);
+	if (first_room == NULL || second_room == NULL) {
+		my_free_array((void **)cut);
+		my_puterror("lem_in: error: Unknown room: ");
+		return (84);
+	}
+	my_free_array((void **)cut);
+	return (connect(first_room, second_room, game));
+}
+
+static int parse_tunnel_2(game_t *game, char **args)
+{
+	room_t *first_room = NULL;
+	room_t *second_room = NULL;
+
+	if (args[0][my_strlen(args[0]) - 1] == '-')
+		args[0][my_strlen(args[0]) - 1] = '\0';
+	else
+		for (int i = 1; args[1][i]; i++)
+			args[1][i - 1] = args[1][i];
+	if (my_strcmp(args[0], args[1]) == 0) {
+		my_puterror("lem_in: error: tunnel connecting to itself: ");
+		return (84);
+	}
+	first_room = get_room_by_name(game, args[0]);
+	second_room = get_room_by_name(game, args[1]);
+	if (first_room == NULL || second_room == NULL) {
+		my_puterror("lem_in: error: Unknown room: ");
+		return (84);
+	}
+	return (connect(first_room, second_room, game));
+}
+
+static int parse_tunnel_3(game_t *game, char **args)
+{
+	room_t *first_room = NULL;
+	room_t *second_room = NULL;
+
+	if (my_strcmp(args[0], args[2]) == 0) {
+		my_puterror("lem_in: error: tunnel connecting to itself: ");
+		return (84);
+	}
+	first_room = get_room_by_name(game, args[0]);
+	second_room = get_room_by_name(game, args[2]);
+	if (first_room == NULL || second_room == NULL) {
+		my_puterror("lem_in: error: Unknown room: ");
+		return (84);
+	}
+	return (connect(first_room, second_room, game));
+}
+
 int parse_tunnel(game_t *game, char **args)
 {
+	switch (my_array_len((void **)args)) {
+	case 1: return (parse_tunnel_1(game, args));
+	case 2: return (parse_tunnel_2(game, args));
+	case 3: return (parse_tunnel_3(game, args));
+	}
 	return (0);
 }
