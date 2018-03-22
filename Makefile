@@ -26,21 +26,18 @@ CFLAGS		+=	$(INCLUDE)
 LIB_DIR		=	lib/
 
 LIB_FLAGS	=	-L $(LIB_DIR)my -lmy \
-			-L $(LIB_DIR)mylist -lmylist \
-
-LIB		=	$(LIB_DIR)my/libmy.a \
-			$(LIB_DIR)mylist/libmylist.a \
+			-L $(LIB_DIR)mylist -lmylist
 
 CC		=	gcc
 
 all:		$(NAME)
 
-$(NAME):	$(LIB) $(OBJ)
+$(NAME):	make_lib $(OBJ)
 		$(CC) -o $(NAME) $(OBJ) $(LIB_FLAGS)
 
-$(LIB):
+make_lib:
 		$(MAKE) -C $(LIB_DIR)my
-		$(MAKE) clean -C $(LIB_DIR)my
+		$(MAKE) -C $(LIB_DIR)mylist
 
 clean:
 		$(RM) $(OBJ)
