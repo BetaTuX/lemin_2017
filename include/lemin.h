@@ -8,6 +8,7 @@
 #ifndef LEMIN_H_
 	#define LEMIN_H_
 
+	#include <stdbool.h>
 	#include "mylist.h"
 
 	typedef enum e_room_type {
@@ -23,6 +24,7 @@
 
 	typedef struct s_room {
 		char *name;
+		bool marked;
 		vector2i_t pos;
 		e_room_t type;
 		l_list_t *tunnels;
@@ -32,7 +34,6 @@
 		int ant_nb;
 		l_list_t *rooms;
 		l_list_t *tunnels;
-
 	} game_t;
 
 #endif
