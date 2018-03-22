@@ -25,7 +25,7 @@
 		char *name;
 		vector2i_t pos;
 		e_room_t type;
-		l_list_t *route;
+		l_list_t *tunnels;
 	} room_t;
 
 	typedef struct s_game {
@@ -35,5 +35,4 @@
 
 	} game_t;
 
-	find_shortest_path();
 #endif
