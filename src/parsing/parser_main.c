@@ -51,7 +51,7 @@ int fill_game(game_t *game)
 		args = my_parse_str_to_array(next_line, " \t", "", "");
 		if (next_line[0] == '#')
 			parse_comment_or_command(&next_room_type, args);
-		else if (parse_line(game, args, next_room_type)) {
+		else if (parse_line(game, args, &next_room_type)) {
 			display_line_error(i, next_line);
 			my_free_array((void **)args);
 			free(next_line);

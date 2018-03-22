@@ -68,7 +68,7 @@ int parse_nb_ant(game_t *game, char **args)
 	return (0);
 }
 
-int parse_line(game_t *game, char **args, e_room_t next_room_type)
+int parse_line(game_t *game, char **args, e_room_t *next_room_type)
 {
 	char *data[my_array_len((void **)args) + 1];
 
@@ -82,7 +82,8 @@ int parse_line(game_t *game, char **args, e_room_t next_room_type)
 	}
 	if (is_nb_ant(data) && parse_nb_ant(game, data))
 		return (84);
-	if (is_room(data) && parse_room(game, next_room_type, args))
+	if (is_room(data) && parse_room(game, *next_room_type, args))
 		return (84);
+	*next_room_type = DEFAULT;
 	return (0);
 }

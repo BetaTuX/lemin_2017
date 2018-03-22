@@ -21,6 +21,6 @@
 	int does_name_already_exist(game_t *game, char *name);
 
 	int parse_comment_or_command(e_room_t *next_room_type, char **args);
-	int parse_line(game_t *game, char **args, e_room_t next_room_type);
+	int parse_line(game_t *game, char **args, e_room_t *next_room_type);
 
 #endif /* !__LEMIN_PARSER_H_ */
