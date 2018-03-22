@@ -7,8 +7,14 @@
 
 #include "my.h"
 #include "lemin.h"
+#include "global.h"
+#include "parsing.h"
 
 int main(UNUSED int argc, UNUSED char **argv)
 {
+	game_t game;
+
+	if (fill_game(&game))
+		return (ERROR);
 	return (0);
 }
