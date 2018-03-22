@@ -5,6 +5,7 @@
 ** Reverses a linked list
 */
 
+#include <stdlib.h>
 #include "mylist.h"
 
 int my_rev_list(l_list_t **begin)
