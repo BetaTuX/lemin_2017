@@ -12,7 +12,9 @@ SRC_FILES	=	global.c		\
 
 PARSING_DIR	=	$(realpath src/parsing)
 
-PARSING_FILES	=	parser_main.c
+PARSING_FILES	=	parser_main.c					\
+			parser_comment_or_command.c			\
+			parser_line.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 			$(addprefix $(PARSING_DIR)/, $(PARSING_FILES))

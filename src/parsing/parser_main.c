@@ -11,14 +11,13 @@
 #include "my.h"
 #include "lemin.h"
 
-int parse_comment_or_command(UNUSED e_room_t *next_room_type, \
-UNUSED char **args)
+void reverse_linked_lists(game_t *game)
 {
-	return (0);
+	my_rev_list(&(game->rooms));
+	my_rev_list(&(game->tunnels));
 }
 
-int parse_line(UNUSED game_t *game, UNUSED char **args, \
-UNUSED e_room_t next_room_type)
+int check_rooms_validity(game_t *game)
 {
 	return (0);
 }
@@ -43,5 +42,6 @@ int fill_game(game_t *game)
 		free(next_line);
 		next_line = get_next_line(0);
 	}
-	return (0);
+	reverse_linked_lists(game);
+	return (check_rooms_validity(game));
 }
