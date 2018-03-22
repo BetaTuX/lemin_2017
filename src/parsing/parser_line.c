@@ -45,6 +45,7 @@ int parse_room(game_t *game, e_room_t room_type, char **args)
 	}
 	if ((room = get_default_room(room_type, args)) == NULL)
 		return (84);
+	(game->room_nb) += 1;
 	push(&(game->rooms), room);
 	if (room_type == START)
 		game->start = room;

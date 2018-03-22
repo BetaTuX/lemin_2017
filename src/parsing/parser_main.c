@@ -20,7 +20,12 @@ void reverse_linked_lists(game_t *game)
 
 int check_rooms_validity(game_t *game)
 {
-	(void)game;
+	if (game->start == NULL || game->end == NULL) {
+		my_puterror("lem_in: error: missing ");
+		my_puterror((game->end == NULL) ? "ending" : "starting");
+		my_puterror(" room\n");
+		return (84);
+	}
 	return (0);
 }
 
