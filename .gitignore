@@ -1,7 +1,8 @@
-*.a
+*~
+\#*\#
 *.o
 *.gcno
-*.gcda
-*.out
-.vscode
-vscode
+libmy.a
+a.out
+test
+lem-in
