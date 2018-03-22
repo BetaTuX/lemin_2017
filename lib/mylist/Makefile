@@ -14,6 +14,7 @@ SRC_DIR	=	src/
 SRC	=	push.c \
 		append.c \
 		my_list_size.c \
+		my_rev_list.c \
 		pop.c \
 		dict_add.c \
 		dict_fetch.c \
