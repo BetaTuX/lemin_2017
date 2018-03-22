@@ -18,6 +18,8 @@
 	bool is_room(char **args);
 	bool is_tunnel(char **args);
 
+	int does_name_already_exist(game_t *game, char *name);
+
 	int parse_comment_or_command(e_room_t *next_room_type, char **args);
 	int parse_line(game_t *game, char **args, e_room_t next_room_type);
 

@@ -15,7 +15,8 @@ PARSING_DIR	=	$(realpath src/parsing)
 PARSING_FILES	=	parser_main.c					\
 			parser_comment_or_command.c			\
 			parser_line.c					\
-			parser_is.c
+			parser_is.c					\
+			parser_is_room_existing.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 			$(addprefix $(PARSING_DIR)/, $(PARSING_FILES))
