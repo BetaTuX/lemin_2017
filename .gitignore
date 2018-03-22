@@ -2,7 +2,9 @@
 \#*\#
 *.o
 *.gcno
-libmy.a
-a.out
+*.a
+*.out
 test
 lem-in
+.vscode
+vscode
