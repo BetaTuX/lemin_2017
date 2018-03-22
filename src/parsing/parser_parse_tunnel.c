@@ -43,8 +43,7 @@ static int parse_tunnel_1(game_t *game, char **args)
 
 	if (my_strcmp(cut[0], cut[1]) == 0) {
 		my_free_array((void **)cut);
-		my_puterror("lem_in: error: tunnel connecting to itself: ");
-		return (84);
+		return (0);
 	}
 	first_room = get_room_by_name(game, cut[0]);
 	second_room = get_room_by_name(game, cut[1]);
@@ -68,8 +67,7 @@ static int parse_tunnel_2(game_t *game, char **args)
 		for (int i = 1; args[1][i]; i++)
 			args[1][i - 1] = args[1][i];
 	if (my_strcmp(args[0], args[1]) == 0) {
-		my_puterror("lem_in: error: tunnel connecting to itself: ");
-		return (84);
+		return (0);
 	}
 	first_room = get_room_by_name(game, args[0]);
 	second_room = get_room_by_name(game, args[1]);
@@ -86,8 +84,7 @@ static int parse_tunnel_3(game_t *game, char **args)
 	room_t *second_room = NULL;
 
 	if (my_strcmp(args[0], args[2]) == 0) {
-		my_puterror("lem_in: error: tunnel connecting to itself: ");
-		return (84);
+		return (0);
 	}
 	first_room = get_room_by_name(game, args[0]);
 	second_room = get_room_by_name(game, args[2]);
