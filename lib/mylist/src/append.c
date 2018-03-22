@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-void append(linked_list_t **list, void *item)
+void append(l_list_t **list, void *item)
 {
-	linked_list_t *cur = *list;
-	linked_list_t *new = malloc(sizeof(*new));
+	l_list_t *cur = *list;
+	l_list_t *new = malloc(sizeof(*new));
 
 	new->data = item;
 	new->next = NULL;

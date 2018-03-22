@@ -16,16 +16,20 @@ OBJ		=	$(SRC:%.c=%.o)
 
 NAME		=	lem_in
 
-INCLUDE		=	-I include -I lib/my/include
+INCLUDE		=	-I include \
+			-I lib/my/include \
+			-I lib/mylist/include \
 
 CFLAGS		=	-Wall -Wextra
 CFLAGS		+=	$(INCLUDE)
 
 LIB_DIR		=	lib/
 
-LIB_FLAGS	=	-L $(LIB_DIR)my -lmy
+LIB_FLAGS	=	-L $(LIB_DIR)my -lmy \
+			-L $(LIB_DIR)mylist -lmylist \
 
-LIB		=	$(LIB_DIR)my/libmy.a
+LIB		=	$(LIB_DIR)my/libmy.a \
+			$(LIB_DIR)mylist/libmylist.a \
 
 CC		=	gcc
 

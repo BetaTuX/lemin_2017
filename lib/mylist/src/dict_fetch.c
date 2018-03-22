@@ -31,9 +31,9 @@ static int my_strcmp(char const *s1, char const *s2)
 	return (0);
 }
 
-void *dict_fetch(linked_dict_t *dict, char *label)
+void *dict_fetch(l_dict_t *dict, char *label)
 {
-	linked_dict_t *cur = dict;
+	l_dict_t *cur = dict;
 
 	for (; cur != 0; cur = cur->next) {
 		if (!my_strcmp(((void **)(cur->data))[0], label))

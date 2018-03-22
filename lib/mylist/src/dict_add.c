@@ -31,7 +31,7 @@ static char *my_strdup(char const *src)
 	return (my_strcpy(malloc(my_strlen(src) * sizeof(char) + 1), src));
 }
 
-void dict_add(linked_dict_t **dict, char *label, void *data)
+void dict_add(l_dict_t **dict, char *label, void *data)
 {
 	void **var = malloc(2 * sizeof(void *));
 

@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-void *pop(linked_list_t **list)
+void *pop(l_list_t **list)
 {
 	void *ret_elem;
-	linked_list_t *to_free;
+	l_list_t *to_free;
 
 	ret_elem = (*list)->data;
 	to_free = (*list);

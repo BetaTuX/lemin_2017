@@ -7,7 +7,7 @@
 
 #include "mylist.h"
 
-linked_list_t *my_find_node(linked_list_t *begin, void const *data_ref,\
+l_list_t *my_find_node(l_list_t *begin, void const *data_ref,\
 int (*cmp)()) {
 	while (begin != 0) {
 		if ((*cmp)(data_ref, begin->data) == 0) {

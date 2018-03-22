@@ -7,9 +7,9 @@
 
 #include "mylist.h"
 
-void my_concat_list(linked_list_t **begin1, linked_list_t *begin2)
+void my_concat_list(l_list_t **begin1, l_list_t *begin2)
 {
-	linked_list_t *cur = *begin1;
+	l_list_t *cur = *begin1;
 
 	while (cur->next != 0)
 		cur = cur->next;

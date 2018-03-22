@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-int my_delete_nodes(linked_list_t **begin, void const *data_ref, int (*cmp)())
+int my_delete_nodes(l_list_t **begin, void const *data_ref, int (*cmp)())
 {
-	linked_list_t *ans = *begin;
+	l_list_t *ans = *begin;
 
 	while ((*cmp)((*begin)->data, data_ref) == 0) {
 		ans = (*begin)->next;

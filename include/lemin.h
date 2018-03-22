@@ -8,8 +8,10 @@
 #ifndef LEMIN_H_
 	#define LEMIN_H_
 
+	#include "mylist.h"
+
 	typedef struct s_graph_node {
 		int id;
-		linked_list_t *connected;
+		l_list_t *connected;
 	} graph_t;
 #endif

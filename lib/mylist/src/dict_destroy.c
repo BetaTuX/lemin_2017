@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-void dict_destroy(linked_dict_t *dict)
+void dict_destroy(l_dict_t *dict)
 {
-	linked_dict_t *cur = dict;
+	l_dict_t *cur = dict;
 	char *label = NULL;
 
 	while (dict) {

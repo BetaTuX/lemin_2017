@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-void comp_data(linked_list_t *elem1, linked_list_t *elem2, int (*cmp)())
+void comp_data(l_list_t *elem1, l_list_t *elem2, int (*cmp)())
 {
-	linked_list_t *swp = malloc(sizeof(linked_list_t));
+	l_list_t *swp = malloc(sizeof(l_list_t));
 
 	if ((*cmp)(elem1->data, elem2->data) > 0) {
 		swp->data = elem2->data;
@@ -19,9 +19,9 @@ void comp_data(linked_list_t *elem1, linked_list_t *elem2, int (*cmp)())
 	}
 }
 
-void my_sort_list(linked_list_t **begin, int (*cmp)())
+void my_sort_list(l_list_t **begin, int (*cmp)())
 {
-	linked_list_t *cur = *begin;
+	l_list_t *cur = *begin;
 
 	for (int i = 0; i <= my_list_size(cur); i++) {
 		while ((*begin)->next != 0) {

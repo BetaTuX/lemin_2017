@@ -8,11 +8,11 @@
 #include <stdlib.h>
 #include "mylist.h"
 
-void push(linked_list_t **list, void *elem)
+void push(l_list_t **list, void *elem)
 {
-	linked_list_t *new_elem;
+	l_list_t *new_elem;
 
-	new_elem = malloc(sizeof(linked_list_t));
+	new_elem = malloc(sizeof(l_list_t));
 	new_elem->data = elem;
 	new_elem->next = *list;
 	*list = new_elem;

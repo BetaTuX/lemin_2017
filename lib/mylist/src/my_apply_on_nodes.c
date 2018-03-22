@@ -7,7 +7,7 @@
 
 #include "mylist.h"
 
-int my_apply_on_nodes(linked_list_t *begin, int (*f)(void *))
+int my_apply_on_nodes(l_list_t *begin, int (*f)(void *))
 {
 	while (begin != 0) {
 		(*f)(begin->data);

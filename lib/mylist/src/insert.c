@@ -7,10 +7,10 @@
 
 #include "mylist.h"
 
-void insert(linked_list_t **list, int index, void *elem)
+void insert(l_list_t **list, int index, void *elem)
 {
 	int len = my_rev_list(list);
-	linked_list_t *cur = *list;
+	l_list_t *cur = *list;
 
 	push(&cur, 0);
 	for (int i = 0; cur != 0 && i < len - index; i++) {
