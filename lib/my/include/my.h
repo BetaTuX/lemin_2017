@@ -113,4 +113,7 @@ const char ALLOWED_PRECISION[12];
 
 const char ALLOWED_TYPES[13];
 
+#ifndef UNUSED
+	#define UNUSED __attribute__((unused))
+#endif
 #endif
