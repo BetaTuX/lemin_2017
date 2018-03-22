@@ -39,10 +39,11 @@ static bool is_tunnel(char **args)
 		return (false);
 	switch (nb_args) {
 	case 1:
-		if (match("*-*", args[0]))
+		if (match(args[0], "*-*"))
 			return (true);
 		break;
-	case 2: if (match("*-", args[0]) || match("-*", args[1]))
+	case 2:
+		if (match(args[0], "*-") || match(args[1], "-*"))
 			return (true);
 		break;
 	case 3:
@@ -55,14 +56,14 @@ static bool is_tunnel(char **args)
 
 int parse_line(game_t *game, char **args, e_room_t next_room_type)
 {
-	char *data[my_array_len((void **)args)];
+	char *data[my_array_len((void **)args) + 1];
 
 	for (int i = 0; args[i] != NULL && args[i][0] != '#'; i++) {
 		data[i] = args[i];
 		data[i + 1] = NULL;
 	}
 	if (!is_nb_ant(data) && !is_room(data) && !is_tunnel(data)) {
-		my_puterror("lem_in: error: invalid line!\n");
+		my_puterror("lem_in: error: invalid line: ");
 		return (84);
 	}
 	return (0);

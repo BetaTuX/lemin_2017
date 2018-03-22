@@ -22,6 +22,17 @@ int check_rooms_validity(game_t *game)
 	return (0);
 }
 
+void display_line_error(int line_pos, char *line)
+{
+	char *int_str = my_int_to_str(line_pos);
+
+	my_puterror(line);
+	my_puterror(" at position: ");
+	my_puterror(int_str);
+	my_puterror("\n");
+	free(int_str);
+}
+
 int fill_game(game_t *game)
 {
 	char *next_line = NULL;
@@ -29,11 +40,12 @@ int fill_game(game_t *game)
 	e_room_t next_room_type = 0;
 
 	next_line = get_next_line(0);
-	while (next_line != NULL) {
+	for (int i = 1; next_line != NULL; i++) {
 		args = my_parse_str_to_array(next_line, " \t", "", "");
 		if (next_line[0] == '#')
 			parse_comment_or_command(&next_room_type, args);
 		else if (parse_line(game, args, next_room_type)) {
+			display_line_error(i, next_line);
 			my_free_array((void **)args);
 			free(next_line);
 			return (84);
