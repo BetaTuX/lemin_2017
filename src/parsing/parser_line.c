@@ -14,7 +14,7 @@
 #include "lemin.h"
 #include "parsing.h"
 
-room_t *get_default_room(game_t *game, e_room_t room_type, char **args)
+room_t *get_default_room(e_room_t room_type, char **args)
 {
 	room_t *room = NULL;
 
@@ -43,7 +43,7 @@ int parse_room(game_t *game, e_room_t room_type, char **args)
 		my_puterror("lem_in: error: redefinition of ending room\n");
 		return (84);
 	}
-	if ((room = get_default_room(game, room_type, args)) == NULL)
+	if ((room = get_default_room(room_type, args)) == NULL)
 		return (84);
 	push(&(game->rooms), room);
 	if (room_type == START)
