@@ -5,6 +5,7 @@
 ** lemin main fx
 */
 
+#include "my.h"
 #include "lemin.h"
 
 int main(UNUSED int argc, UNUSED char **argv)
