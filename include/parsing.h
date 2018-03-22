@@ -14,4 +14,7 @@
 
 	int fill_game(game_t *game);
 
+	int parse_comment_or_command(e_room_t *next_room_type, char **args);
+	int parse_line(game_t *game, char **args, e_room_t next_room_type);
+
 #endif /* !__LEMIN_PARSER_H_ */
