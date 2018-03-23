@@ -9,3 +9,9 @@ lem_in
 .vscode
 vscode
 *.pl
+*.ant
+anthill*
+tests/
+map_*
+verify_connexion
+.gitignore

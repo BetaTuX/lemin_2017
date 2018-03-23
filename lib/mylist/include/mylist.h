@@ -8,6 +8,8 @@
 #ifndef __BTA_LIST_H_
 #define __BTA_LIST_H_
 
+#include <stdlib.h>
+
 #ifndef NULL
 	#define NULL (void *)0
 #endif
@@ -31,5 +33,19 @@ void *pop(l_list_t **list);
 void dict_add(l_dict_t **dict, char *label, void *data);
 void *dict_fetch(l_dict_t *dict, char *label);
 void dict_destroy(l_dict_t *dict);
+
+/* fx description:
+** initialize a new l_list_t with an initial value
+*/
+static inline l_list_t *initialize_list(void *data, l_list_t *next)
+{
+	l_list_t *list = malloc(sizeof(*list));
+
+	if (!list)
+		return (NULL);
+	list->data = data;
+	list->next = next;
+	return (list);
+}
 
 #endif
