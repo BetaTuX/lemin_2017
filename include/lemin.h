@@ -39,4 +39,7 @@
 		l_list_t *tunnels;
 	} game_t;
 
+
+int display_ants_and_room(game_t *);
+
 #endif

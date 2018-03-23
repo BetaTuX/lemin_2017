@@ -8,7 +8,8 @@
 SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	global.c		\
-			main.c
+			main.c			\
+			display.c
 
 PARSING_DIR	=	$(realpath src/parsing)
 

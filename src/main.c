@@ -16,5 +16,7 @@ int main(UNUSED int argc, UNUSED char **argv)
 
 	if (fill_game(&game))
 		return (ERROR);
+	if (display_ants_and_room(&game) == ERROR)
+		return (ERROR);
 	return (0);
 }
