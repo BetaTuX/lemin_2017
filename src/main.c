@@ -18,7 +18,9 @@ int main(UNUSED int argc, UNUSED char **argv)
 	if (fill_game(&game))
 		return (ERROR);
 	list = bfs(game.start, game.room_nb, NULL);
-	for (l_list_t *cur = list; cur; cur = cur->next)
+	for (l_list_t *cur = list; cur; cur = cur->next) /* DEBUG PURPOSE ONLY*/
 		my_printf("%s\n", ((room_t *)cur->data)->name);
+	if (display_ants_and_room(&game) == ERROR)
+		return (ERROR);
 	return (0);
 }

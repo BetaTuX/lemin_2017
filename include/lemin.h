@@ -40,4 +40,5 @@
 	} game_t;
 
 	l_list_t *bfs(room_t *start, int room_nb, l_list_t *path_list);
+	int display_ants_and_room(game_t *);
 #endif

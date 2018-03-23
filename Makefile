@@ -9,7 +9,8 @@ SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	global.c		\
 			find_shortest_path.c	\
-			main.c
+			main.c			\
+			display.c
 
 PARSING_DIR	=	$(realpath src/parsing)
 
