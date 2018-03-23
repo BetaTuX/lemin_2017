@@ -26,16 +26,40 @@ game->end->pos.x, game->end->pos.y);
 	return (0);
 }
 
-int display_ants_and_room(game_t *game)
+void print_moves(game_t *game, l_list_t *path)
+{
+	l_list_t *cursor = path;
+	int r_nbr = 0;
+	int a_nbr = game->ant_nb;
+
+	for (; cursor != NULL; r_nbr++, cursor = cursor->next);
+	cursor = path;
+	cursor = cursor->next;
+	for (int i = 1; i <= a_nbr; i++) {
+		for (; cursor != NULL; cursor = cursor->next) {
+			my_printf("P%i-", i);
+			my_printf("%s\n", ((room_t *)cursor->data)->name);
+		}
+		cursor = path;
+		cursor = cursor->next;
+	}
+}
+
+int display_ants_and_room(game_t *game, l_list_t *path)
 {
 	l_list_t *cursor = game->rooms;
 
-	my_printf("#number_of_ants\n%i\n", game->ant_nb);
-	my_printf("#rooms\n");
+	my_printf("#number_of_ants\n%i\n#rooms\n", game->ant_nb);
 	for (; cursor != NULL; cursor = cursor->next) {
 		if (is_it_start_or_end_room(game, cursor) != 1)
 			my_printf("%s %i %i\n", ((room_t *)cursor->data)->\
 name, ((room_t *)cursor->data)->pos.x, ((room_t *)cursor->data)->pos.y);
 	}
+	my_putstr("#tunnels\n");
+	for (cursor = game->tunnels; cursor != NULL; cursor = cursor->next) {
+		my_printf("%s\n", (char *)cursor->data);
+	}
+	my_putstr("#moves\n");
+	print_moves(game, path);
 	return (0);
 }
