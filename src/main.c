@@ -20,8 +20,6 @@ int main(UNUSED int argc, UNUSED char **argv)
 	list = bfs(game.start, game.room_nb, NULL);
 	if (list == NULL)
 		return (ERROR);
-	for (l_list_t *cur = list; cur; cur = cur->next) /* DEBUG PURPOSE ONLY*/
-		my_printf("%s\n", ((room_t *)cur->data)->name);
 	if (display_ants_and_room(&game, list) == ERROR)
 		return (ERROR);
 	return (0);
