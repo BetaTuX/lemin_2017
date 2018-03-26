@@ -28,9 +28,9 @@ int parse_line(game_t *game, char **args, e_room_t *next_room_type)
 	}
 	if (is_nb_ant(data) && parse_nb_ant(game, data))
 		return (84);
-	if (is_room(data) && parse_room(game, *next_room_type, args))
+	else if (is_room(data) && parse_room(game, *next_room_type, args))
 		return (84);
-	if (is_tunnel(data) && parse_tunnel(game, args))
+	else if (is_tunnel(data) && parse_tunnel(game, args))
 		return (84);
 	*next_room_type = DEFAULT;
 	return (0);
