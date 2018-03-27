@@ -7,13 +7,23 @@
 
 #include "lemin.h"
 
+static void verify_tunnel(l_list_t **list, room_t *data, l_list_t *next)
+{
+	void *tmp;
+
+	tmp = initialize_list(data, next);
+	if (!tmp)
+		return;
+	push(list, tmp);
+	data->marked = true;
+}
+
 static void add_other_tunnels(l_list_t **list, l_list_t *cur, l_list_t *sec_cur)
 {
 	for (sec_cur = sec_cur->next; sec_cur; sec_cur = sec_cur->next) {
 		if (!(((room_t *)sec_cur->data)->marked)) {
-			push(list, initialize_list(sec_cur->data, \
-((l_list_t *)cur->data)->next));
-			((room_t *)sec_cur->data)->marked = true;
+			verify_tunnel(list, sec_cur->data, \
+((l_list_t *)cur->data)->next);
 		}
 	}
 }
@@ -25,6 +35,8 @@ static l_list_t *navigate_layer(l_list_t **list)
 
 	for (cur = *list; cur; cur = cur->next) {
 		sec_cur = ((room_t *)((l_list_t *)cur->data)->data)->tunnels;
+		if (!sec_cur)
+			continue;
 		for (room_t *r = sec_cur->data; r && r->marked; \
 sec_cur = sec_cur->next, r = (room_t *)(sec_cur) ? sec_cur->data : NULL);
 		if (sec_cur) {
@@ -32,8 +44,7 @@ sec_cur = sec_cur->next, r = (room_t *)(sec_cur) ? sec_cur->data : NULL);
 			((room_t *)sec_cur->data)->marked = true;
 			add_other_tunnels(list, cur, sec_cur);
 		}
-		if (cur && cur->data && ((l_list_t *)cur->data)->data && \
-((room_t *)((l_list_t *)cur->data)->data)->type == END) {
+		if (cur && LIST(cur)->data && ROOM(LIST(cur))->type == END) {
 			my_rev_list((l_list_t **)&(cur->data));
 			return ((l_list_t *)cur->data);
 		}
@@ -45,8 +56,12 @@ static l_list_t *find_first_path(room_t *start, int room_nb)
 {
 	l_list_t *list = NULL;
 	l_list_t *return_tmp = NULL;
+	void *tmp;
 
-	push(&list, initialize_list(start, NULL));
+	tmp = initialize_list(start, NULL);
+	if (tmp == NULL)
+		return (NULL);
+	push(&list, tmp);
 	start->marked = true;
 	for (int i = 0; i < room_nb; i++) {
 		return_tmp = navigate_layer(&list);
