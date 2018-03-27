@@ -35,7 +35,7 @@ INCLUDE		=	-I include \
 			-I lib/my/include \
 			-I lib/mylist/include \
 
-CFLAGS		=	-Wall -Wextra -O3
+CFLAGS		=	-Wall -Wextra
 CFLAGS		+=	$(INCLUDE)
 
 LIB_DIR		=	lib/
