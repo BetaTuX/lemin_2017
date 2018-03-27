@@ -40,23 +40,25 @@ my_strlen(second_room->name) + 1;
 
 static int parse_tunnel_1(game_t *game, char **args)
 {
-	char **cut = my_parse_str_to_array(args[0], "-", "", "");
+	char *cut[2];
 	room_t *first_room = NULL;
 	room_t *second_room = NULL;
+	int i = 0;
 
+	cut[0] = args[0];
+	for (i = 0; args[0][i] != '-'; i++);
+	args[0][i] = '\0';
+	cut[1] = &(args[0][i + 1]);
 	first_room = get_room_by_name(game, cut[0]);
 	second_room = get_room_by_name(game, cut[1]);
 	if (first_room == NULL || second_room == NULL) {
-		my_free_array((void **)cut);
 		my_puterror("lem_in: error: Unknown room: ");
 		return (84);
 	}
 	if (my_strcmp(cut[0], cut[1]) == 0) {
-		my_free_array((void **)cut);
 		connect(first_room, second_room, game, 0);
 		return (0);
 	}
-	my_free_array((void **)cut);
 	return (connect(first_room, second_room, game, 1));
 }
 
