@@ -10,6 +10,7 @@
 
 	#include <stdbool.h>
 	#include "mylist.h"
+	#include "shortcut.h"
 
 	typedef enum e_room_type {
 		DEFAULT = 0,
