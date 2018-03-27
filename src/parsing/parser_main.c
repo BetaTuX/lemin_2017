@@ -7,6 +7,7 @@
 
 /* File created the 22/03/2018 at 15:44:15 by julian.frabel@epitech.eu */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "my.h"
 #include "lemin.h"
@@ -43,12 +44,12 @@ void display_line_error(int line_pos, char *line)
 int fill_game(game_t *game)
 {
 	char *next_line = NULL;
+	size_t size = 0;
 	char **args = NULL;
 	e_room_t next_room_type = 0;
 
-	next_line = get_next_line(0);
-	for (int i = 1; next_line != NULL; i++) {
-		args = my_parse_str_to_array(next_line, " \t", "", "");
+	for (int i = 1; getline(&next_line, &size, stdin) != -1; i++) {
+		args = my_parse_str_to_array(next_line, " \t\n", "", "");
 		if (next_line[0] == '#')
 			parse_comment_or_command(&next_room_type, args);
 		else if (parse_line(game, args, &next_room_type)) {
@@ -59,7 +60,7 @@ int fill_game(game_t *game)
 		}
 		my_free_array((void **)args);
 		free(next_line);
-		next_line = get_next_line(0);
+		next_line = NULL;
 	}
 	reverse_linked_lists(game);
 	return (check_rooms_validity(game));

@@ -68,7 +68,7 @@ NAME		=	libmy.a
 
 INCLUDE		=	-I include
 
-CFLAGS		=	-Wall -Wextra -O
+CFLAGS		=	-Wall -Wextra
 CFLAGS		+=	$(INCLUDE)
 
 CC		=	gcc
