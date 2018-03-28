@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #ifndef NULL
-	#define NULL (void *)0
+	#define NULL ((void *)0)
 #endif
 
 typedef struct node {
@@ -27,6 +27,7 @@ int my_delete_nodes(l_list_t **list, void const *data_ref, int (*cmp)());
 int my_list_size(l_list_t const *list);
 int my_rev_list(l_list_t **list);
 void my_sort_list(l_list_t **list, int (*cmp)());
+l_list_t *list_at(l_list_t *list, int ind);
 void push(l_list_t **list, void *elem);
 void append(l_list_t **list, void *elem);
 void *pop(l_list_t **list);

@@ -15,6 +15,7 @@ SRC	=	push.c \
 		append.c \
 		my_list_size.c \
 		my_rev_list.c \
+		list_at.c \
 		pop.c \
 		dict_add.c \
 		dict_fetch.c \

@@ -128,4 +128,9 @@ const char ALLOWED_TYPES[13];
 	#define UNUSED __attribute__((unused))
 #endif
 
+static inline int my_abs(int value)
+{
+	return ((value < 0) ? -value : value);
+}
+
 #endif
