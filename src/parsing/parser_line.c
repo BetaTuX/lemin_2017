@@ -26,11 +26,11 @@ int parse_line(game_t *game, char **args, e_room_t *next_room_type)
 		my_puterror("lem_in: error: invalid line: ");
 		return (84);
 	}
-	if (is_nb_ant(data) && parse_nb_ant(game, data))
+	if (is_nb_ant(data) && parse_nb_ant(game, data) == 84)
 		return (84);
-	else if (is_room(data) && parse_room(game, *next_room_type, args))
+	else if (is_room(data) && parse_room(game, *next_room_type, args) == 84)
 		return (84);
-	else if (is_tunnel(data) && parse_tunnel(game, args))
+	else if (is_tunnel(data) && parse_tunnel(game, args) == 84)
 		return (84);
 	*next_room_type = DEFAULT;
 	return (0);

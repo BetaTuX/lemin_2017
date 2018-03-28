@@ -25,7 +25,7 @@ int check_rooms_validity(game_t *game)
 		my_puterror("lem_in: error: missing ");
 		my_puterror((game->end == NULL) ? "ending" : "starting");
 		my_puterror(" room\n");
-		return (84);
+		return (0);
 	}
 	return (0);
 }
@@ -52,7 +52,7 @@ int fill_game(game_t *game)
 		args = my_parse_str_to_array(next_line, " \t\n", "", "");
 		if (next_line[0] == '#')
 			parse_comment_or_command(&next_room_type, args);
-		else if (parse_line(game, args, &next_room_type)) {
+		else if (parse_line(game, args, &next_room_type) == 84) {
 			display_line_error(i, next_line);
 			my_free_array((void **)args);
 			free(next_line);

@@ -53,7 +53,8 @@ static int parse_tunnel_1(game_t *game, char **args)
 	second_room = get_room_by_name(game, cut[1]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		return (84);
+		connect(first_room, second_room, game, 0);
+		return (0);
 	}
 	if (my_strcmp(cut[0], cut[1]) == 0) {
 		connect(first_room, second_room, game, 0);
@@ -76,7 +77,8 @@ static int parse_tunnel_2(game_t *game, char **args)
 	second_room = get_room_by_name(game, args[1]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		return (84);
+		connect(first_room, second_room, game, 0);
+		return (0);
 	}
 	if (my_strcmp(args[0], args[1]) == 0) {
 		connect(first_room, second_room, game, 0);
@@ -94,7 +96,8 @@ static int parse_tunnel_3(game_t *game, char **args)
 	second_room = get_room_by_name(game, args[2]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		return (84);
+		connect(first_room, second_room, game, 0);
+		return (0);
 	}
 	if (my_strcmp(args[0], args[2]) == 0) {
 		connect(first_room, second_room, game, 0);
