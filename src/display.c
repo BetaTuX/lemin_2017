@@ -60,6 +60,7 @@ name, ((room_t *)cursor->data)->pos.x, ((room_t *)cursor->data)->pos.y);
 		my_printf("%s\n", (char *)cursor->data);
 	}
 	my_putstr("#moves\n");
-	print_moves(game, path);
+	if (path != NULL)
+		print_moves(game, path);
 	return (0);
 }
