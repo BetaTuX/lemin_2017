@@ -15,10 +15,9 @@
 #include "parsing.h"
 
 static int connect(room_t *first_room, room_t *second_room, \
-game_t *game, int create_in_graph)
+game_t *game, char *names[2])
 {
-	int tunnel_char_size = my_strlen(first_room->name) + \
-my_strlen(second_room->name) + 1;
+	int tunnel_char_size = my_strlen(names[0]) + my_strlen(names[1]) + 1;
 	char *tunnel = malloc(sizeof(*tunnel) * (tunnel_char_size + 1));
 
 	if (tunnel == NULL) {
@@ -27,11 +26,11 @@ my_strlen(second_room->name) + 1;
 	}
 	for (int i = 0; i < tunnel_char_size; i++)
 		tunnel[i] = 0;
-	my_strcat(tunnel, first_room->name);
+	my_strcat(tunnel, names[0]);
 	my_strcat(tunnel, "-");
-	my_strcat(tunnel, second_room->name);
+	my_strcat(tunnel, names[1]);
 	push(&(game->tunnels), tunnel);
-	if (create_in_graph) {
+	if (my_strcmp(names[0], names[1]) != 0 && first_room && second_room) {
 		push(&(first_room->tunnels), second_room);
 		push(&(second_room->tunnels), first_room);
 	}
@@ -53,14 +52,8 @@ static int parse_tunnel_1(game_t *game, char **args)
 	second_room = get_room_by_name(game, cut[1]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		connect(first_room, second_room, game, 0);
-		return (0);
 	}
-	if (my_strcmp(cut[0], cut[1]) == 0) {
-		connect(first_room, second_room, game, 0);
-		return (0);
-	}
-	return (connect(first_room, second_room, game, 1));
+	return (connect(first_room, second_room, game, cut));
 }
 
 static int parse_tunnel_2(game_t *game, char **args)
@@ -77,33 +70,22 @@ static int parse_tunnel_2(game_t *game, char **args)
 	second_room = get_room_by_name(game, args[1]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		connect(first_room, second_room, game, 0);
-		return (0);
 	}
-	if (my_strcmp(args[0], args[1]) == 0) {
-		connect(first_room, second_room, game, 0);
-		return (0);
-	}
-	return (connect(first_room, second_room, game, 1));
+	return (connect(first_room, second_room, game, args));
 }
 
 static int parse_tunnel_3(game_t *game, char **args)
 {
+	char *names[2] = {args[0], args[2]};
 	room_t *first_room = NULL;
 	room_t *second_room = NULL;
 
-	first_room = get_room_by_name(game, args[0]);
-	second_room = get_room_by_name(game, args[2]);
+	first_room = get_room_by_name(game, names[0]);
+	second_room = get_room_by_name(game, names[1]);
 	if (first_room == NULL || second_room == NULL) {
 		my_puterror("lem_in: error: Unknown room: ");
-		connect(first_room, second_room, game, 0);
-		return (0);
 	}
-	if (my_strcmp(args[0], args[2]) == 0) {
-		connect(first_room, second_room, game, 0);
-		return (0);
-	}
-	return (connect(first_room, second_room, game, 1));
+	return (connect(first_room, second_room, game, names));
 }
 
 int parse_tunnel(game_t *game, char **args)
