@@ -10,7 +10,7 @@
 #include "global.h"
 #include "parsing.h"
 
-int main(UNUSED int argc, UNUSED char **argv)
+int main(void)
 {
 	game_t game = {0, 0, NULL, NULL, NULL, NULL};
 	l_list_t *list = NULL;

@@ -34,6 +34,7 @@ void *pop(l_list_t **list);
 void dict_add(l_dict_t **dict, char *label, void *data);
 void *dict_fetch(l_dict_t *dict, char *label);
 void dict_destroy(l_dict_t *dict);
+l_list_t *list_at(l_list_t *list, int ind);
 
 /* fx description:
 ** initialize a new l_list_t with an initial value
