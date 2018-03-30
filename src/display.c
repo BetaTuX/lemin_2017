@@ -26,25 +26,6 @@ game->end->pos.x, game->end->pos.y);
 	return (0);
 }
 
-void print_moves(game_t *game, l_list_t *path)
-{
-	l_list_t *cursor = path;
-	int r_nbr = 0;
-	int a_nbr = game->ant_nb;
-
-	for (; cursor != NULL; r_nbr++, cursor = cursor->next);
-	cursor = path;
-	cursor = cursor->next;
-	for (int i = 1; i <= a_nbr; i++) {
-		for (; cursor != NULL; cursor = cursor->next) {
-			my_printf("P%i-", i);
-			my_printf("%s\n", ((room_t *)cursor->data)->name);
-		}
-		cursor = path;
-		cursor = cursor->next;
-	}
-}
-
 int display_ants_and_room(game_t *game, l_list_t *path)
 {
 	l_list_t *cursor = game->rooms;
