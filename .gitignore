@@ -10,7 +10,6 @@ lem_in
 vscode
 *.pl
 *.ant
-anthill*
 tests_anthill
 map_*
 verify_connexion
