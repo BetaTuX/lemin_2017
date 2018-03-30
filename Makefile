@@ -65,3 +65,7 @@ re:		fclean all
 
 debug:		CFLAGS += -g
 debug:		re
+
+tests_run:
+		$(MAKE) -C tests/
+		./tests/test
