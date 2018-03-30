@@ -11,14 +11,14 @@
 
 int is_it_start_or_end_room(game_t *game, l_list_t *cursor)
 {
-	if (my_strcmp(((room_t *)cursor->data)->name, game->start->name) \
-== 0) {
+	if (game->start != NULL && my_strcmp(((room_t *)cursor->data)->name, \
+game->start->name) == 0) {
 		my_printf("##start\n%s %i %i\n", game->start->name, \
 game->start->pos.x, game->start->pos.y);
 		return (1);
 	}
-	if (my_strcmp(((room_t *)cursor->data)->name, game->end->name) \
-== 0) {
+	if (game->end != NULL && my_strcmp(((room_t *)cursor->data)->name, \
+game->end->name) == 0) {
 		my_printf("##end\n%s %i %i\n", game->end->name, \
 game->end->pos.x, game->end->pos.y);
 		return (1);
