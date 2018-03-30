@@ -11,7 +11,7 @@ vscode
 *.pl
 *.ant
 anthill*
-tests/
+tests_anthill
 map_*
 verify_connexion
 .gitignore
