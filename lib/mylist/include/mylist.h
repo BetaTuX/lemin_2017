@@ -49,4 +49,11 @@ static inline l_list_t *initialize_list(void *data, l_list_t *next)
 	return (list);
 }
 
+	#define DICT_RET(Fx_name, Type, ...) \
+	\
+		static Type Fx_name(l_list_t *list) \
+		{ \
+			return (*(Type *)list->data); \
+		}
+
 #endif
