@@ -43,4 +43,11 @@
 	l_list_t *bfs(room_t *start, int room_nb, l_list_t *path_list);
 	int display_ants_and_room(game_t *, l_list_t *);
 	void print_moves(game_t *game, l_list_t *path);
+	l_list_t *check_end(l_list_t *list_tunnels);
+
+	static inline room_t *mark_room(l_list_t *cur)
+	{
+		((room_t *)cur->data)->marked = true;
+		return (cur->data);
+	}
 #endif

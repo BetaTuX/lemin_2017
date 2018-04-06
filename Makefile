@@ -9,6 +9,7 @@ SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	global.c		\
 			find_shortest_path.c	\
+			shortest_path_util.c	\
 			main.c			\
 			display_moves.c			\
 			display.c

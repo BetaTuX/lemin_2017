@@ -40,16 +40,11 @@ static l_list_t *navigate_layer(l_list_t **list)
 		for (room_t *r = sec_cur->data; r && r->marked; \
 sec_cur = sec_cur->next, r = (room_t *)(sec_cur) ? sec_cur->data : NULL);
 		if (sec_cur) {
-			push((l_list_t **)&(cur->data), sec_cur->data);
-			((room_t *)sec_cur->data)->marked = true;
+			push((l_list_t **)&(cur->data), mark_room(sec_cur));
 			add_other_tunnels(list, cur, sec_cur);
 		}
-		if (cur && LIST(cur)->data && ROOM(LIST(cur))->type == END) {
-			my_rev_list((l_list_t **)&(cur->data));
-			return ((l_list_t *)cur->data);
-		}
 	}
-	return (NULL);
+	return (check_end(*list));
 }
 
 static l_list_t *find_first_path(room_t *start, int room_nb)
