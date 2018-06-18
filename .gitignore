@@ -15,3 +15,4 @@ map_*
 verify_connexion
 .gitignore
 anthill_insane
+tests
